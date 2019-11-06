@@ -51,7 +51,6 @@ import (
 //}
 
 // 斐波那契数列
-
 func testFibonacci() {
 	f := fibonacci()
 	for i := 0; i < 10; i++ {

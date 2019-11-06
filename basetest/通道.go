@@ -5,6 +5,11 @@ import (
 	"time"
 )
 
+/*
+
+
+ */
+
 var channel = make(chan int)
 
 func printer(s string) {
@@ -37,7 +42,6 @@ func main14() {
 	go person2()
 
 	for {
-
 	}
 
 	/*
