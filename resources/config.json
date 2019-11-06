@@ -1,0 +1,46 @@
+{
+  "gameId":"5c9090e6d5316a153118bffa",
+  "deleted":false,
+  "createTime":1553004138423,
+  "packageId":"5c90f66ad5316a213683dd7a",
+  "updateTime":null,
+  "apkId":"5c90a569d5316a213683dd43",
+  "channelIds":[
+    "5c4abbd7023b9a271cd5c885"
+  ],
+  "content":[
+    {
+      "apkVersion": "3.0.1",
+      "outputDir":"/Users/supozheng/work/xinhun/packtool/output",
+      "outputFileName":"sgdh",
+      "signConfig":{
+        "keystore":"http://192.168.11.177/pack/temp/20190423/1555986297126.keystore",
+        "storePass":"xinhun888",
+        "alias":"xinhun.keystore",
+        "keyPass":"xinhun888"
+      },
+      "buildDir":"/Users/supozheng/work/xinhun/packtool/build1",
+      "packageId":"com.tencent.tmgp.sgqjz1",
+      "gameFile":"/Users/supozheng/work/xinhun/packtool/app-debug.apk",
+      "icon":"/Users/supozheng/work/xinhun/packtool/data/com.tencent.tmgp.sgqjz1/1558670039841.png",
+      "channelType":3,
+      "cpses":["aa","bb","cc"],
+      "gameName":"AAA三国大亨S",
+      "gameReportName":"大亨",
+      "channelResourceDir":"http://admin.image.xhungame.com/7face21836e047ce9c2baff30255ad19_CHANNEL_RESOURCE_FILE.aar",
+      "channelConfig":[
+        {
+          "appId":"2882303761518063304"
+        },
+        {
+          "appKey":"5271806359304"
+        }
+      ],
+      "channelName":"xiaomi",
+      "channelVersion":"3.0.0.1",
+      "splashImage":[
+        "http://192.168.11.177/pack/temp/20190524/1558670044699.jpg"
+      ]
+    }
+  ]
+}
