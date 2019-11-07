@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"io/ioutil"
 	"strings"
+	"testing"
 )
 
-func main12() {
+func TestXunliang(t *testing.T) {
 	//accessFile("F:\\chromedownload\\LPE-DLX")
 	getCharFromString()
 }

@@ -6,10 +6,6 @@ import (
 	"testing"
 )
 
-func main() {
-	TestWalk(&testing.T{})
-}
-
 func TestWalk(t *testing.T) {
 	var petWalker pet.Walker
 	var filepathWalker filepath.Walker

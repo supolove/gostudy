@@ -3,6 +3,7 @@ package basetest
 import (
 	"fmt"
 	"math/rand"
+	"testing"
 	"time"
 )
 
@@ -30,7 +31,7 @@ func produce(c chan int) {
 	}
 }
 
-func main() {
+func TestRoutine(t *testing.T) {
 	go p()
 	var input string
 	fmt.Scanln(&input)

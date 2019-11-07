@@ -1,9 +1,12 @@
 package basetest
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
 // 字典，映射， key-value， key唯一
-func main4() {
+func TestMap(t *testing.T) {
 	var m1 map[int]string
 	fmt.Println(m1 == nil)
 

@@ -3,10 +3,11 @@ package basetest
 import (
 	"fmt"
 	"runtime"
+	"testing"
 )
 
 // case 语句里必须是一个io操作
-func main5() {
+func TestSelect(t *testing.T) {
 	/*
 		ch := make(chan int)	// 用来进行数据通信的channel
 		quit := make(chan bool)	// 判断是否退出的channel

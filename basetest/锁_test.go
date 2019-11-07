@@ -3,6 +3,7 @@ package basetest
 import (
 	"fmt"
 	"sync"
+	"testing"
 	"time"
 )
 
@@ -13,7 +14,7 @@ import (
 go程间channel访问顺序导致死锁
 多go程，多channel交叉死锁
 */
-func main15() {
+func TestSuo(t *testing.T) {
 	sisuo3()
 }
 

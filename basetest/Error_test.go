@@ -2,6 +2,7 @@ package basetest
 
 import (
 	"fmt"
+	"testing"
 )
 
 // 定义一个 DivideError 结构
@@ -16,7 +17,7 @@ func (de *DivideError) Error() string {
     Cannot proceed, the divider is zero.
     dividee: %d
     divider: 0
-`
+	`
 	return fmt.Sprintf(strFormat, de.dividee)
 }
 
@@ -35,11 +36,7 @@ func Divide(varDividee int, varDivider int) (result int, errorMsg string) {
 
 }
 
-func swap(a, b int) {
-	b, a = a, b
-}
-
-func main2() {
+func TestError(t *testing.T) {
 
 	// 正常情况
 	if result, errorMsg := Divide(100, 10); errorMsg == "" {

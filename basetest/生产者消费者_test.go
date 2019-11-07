@@ -2,6 +2,7 @@ package basetest
 
 import (
 	"fmt"
+	"testing"
 	"time"
 )
 
@@ -52,7 +53,7 @@ func consumer2(in <-chan OrderInfo) {
 
 // 消费者
 
-func main11() {
+func TestProducer(t *testing.T) {
 	ch := make(chan int, 5)
 
 	go producer(ch)

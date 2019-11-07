@@ -1,10 +1,11 @@
-package main
+package practice
 
 import (
 	"bufio"
 	"fmt"
 	"io"
 	"os"
+	"testing"
 	"time"
 )
 
@@ -13,7 +14,7 @@ import (
 2.读取文件
 3.打印
 */
-func main() {
+func TestSong(t *testing.T) {
 	file, err := os.Open("resources/song.txt")
 	if err != nil {
 		fmt.Println(err.Error())

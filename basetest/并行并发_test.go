@@ -1,10 +1,11 @@
 package basetest
 
 import (
+	"testing"
 	"time"
 )
 
-func main9() {
+func TestBingfa(t *testing.T) {
 	// 并行（parallel）：指在同一时刻，cpu执行多条指令
 	// 并发 用户体验上，程序在并行执行，多个计划任务，轮询执行
 	// 程序： 编译成功得到的二进制文件，只占用磁盘空间

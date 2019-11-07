@@ -1,8 +1,11 @@
 package basetest
 
-import "fmt"
+import (
+	"fmt"
+	"testing"
+)
 
-func main() {
+func TestPanicAndRecover(t *testing.T) {
 	//defer所在函数执行完所有的代码之后，会自动执行defer的这个函数，可以说是析构函数，定义方式：defer function_name()
 
 	//给一个例子，获取素组元素，处理素组访问越界的问题。

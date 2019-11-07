@@ -5,9 +5,10 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"testing"
 )
 
-func main3() {
+func TestFile(t *testing.T) {
 	// Create 文件不存在创建，文件存在，将内容清空
 	// Open 以读方式打开文件
 	// OpenFile 以只读，只写，读写方式打开文件
@@ -34,7 +35,7 @@ func testOpen() {
 }
 
 func testOpenFile() {
-	f, err := os.OpenFile("C:/test.txt", os.O_RDWR, 6)
+	f, err := os.OpenFile("C:/test.txt", os.O_RDWR, os.ModeAppend|os.ModePerm)
 
 	if err != nil {
 		fmt.Println("open file error")
@@ -44,6 +45,11 @@ func testOpenFile() {
 
 	f.WriteString("123456")
 
+}
+
+// 创建目录
+func testMakeDir() {
+	os.Mkdir("dir", os.ModeDir|os.ModePerm)
 }
 
 func testWrite() {

@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"os"
 	"strings"
+	"testing"
 )
 
 var in string
@@ -20,7 +21,7 @@ func init() {
 	flag.StringVar(&out, "out", "", "input target dir!")
 }
 
-func Wxmain() {
+func TestWxmain(t *testing.T) {
 	// jpg : ffd8ff
 	// png : 89504e47
 	// gif : 47494638

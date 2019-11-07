@@ -2,6 +2,7 @@ package basetest
 
 import (
 	"fmt"
+	"testing"
 	"time"
 )
 
@@ -12,7 +13,7 @@ import (
 3. time.After
 */
 
-func Main8() {
+func TestDingshiqi(t *testing.T) {
 
 	fmt.Println("当前时间：", time.Now())
 

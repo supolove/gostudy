@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"io"
 	"strings"
+	"testing"
 )
 
 //
@@ -18,7 +19,7 @@ import (
 //	flag.StringVar(&out, "cc", "", "input target dir!")
 //}
 
-func main1() {
+func TestDeflaterTools(t *testing.T) {
 
 	//flag.Parse()
 	//if len(dd) == 0 {

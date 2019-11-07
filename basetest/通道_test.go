@@ -2,6 +2,7 @@ package basetest
 
 import (
 	"fmt"
+	"testing"
 	"time"
 )
 
@@ -31,7 +32,7 @@ func person2() {
 	printer("world")
 }
 
-func main14() {
+func TestTongdao(t *testing.T) {
 	// channel 队列模型
 	// 是一种数据类型，对应一个"管道"（通道）
 	// 解决协程的同步问题以及协程之间数据共享（数据传递）的问题
@@ -42,6 +43,7 @@ func main14() {
 	go person2()
 
 	for {
+
 	}
 
 	/*

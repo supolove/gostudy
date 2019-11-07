@@ -2,10 +2,11 @@ package basetest
 
 import (
 	"fmt"
+	"testing"
 	"time"
 )
 
-func main10() {
+func TestChannel(t *testing.T) {
 	ch := make(chan int, 1)
 
 	go func() {

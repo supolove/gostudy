@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"testing"
 )
 
-func main13() {
+func TestReadDir(t *testing.T) {
 
 }
 
