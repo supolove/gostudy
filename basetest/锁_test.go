@@ -18,14 +18,17 @@ func TestSuo(t *testing.T) {
 	sisuo3()
 }
 
+// 1.同一个goroutine中，使用同一个 channel 读写。
 func sisuo1() {
 	ch := make(chan int)
 	ch <- 789
-	num := <-ch
+	num := <-ch //  这里会发生一直阻塞的情况，执行不到下面一句
 	fmt.Println("num = ", num)
 }
 
+// 2.读写channel 先于go程创建
 func sisuo2() {
+
 	ch := make(chan int)
 	num := <-ch
 	fmt.Println("num = ", num)
@@ -35,6 +38,9 @@ func sisuo2() {
 	}()
 }
 
+// 3.2个以上的go程中，使用多个 channel 通信。 A go 程 获取channel 1 的同时，尝试使用channel 2，
+// 同一时刻，B go 程 获取channel 2 的同时，尝试使用channel 1
+// 是互相等对方造成死锁
 func sisuo3() {
 	ch1 := make(chan int)
 	ch2 := make(chan int)
@@ -43,14 +49,17 @@ func sisuo3() {
 		for {
 			select {
 			case num := <-ch1:
-				ch2 <- num
+				fmt.Println(num)
+				//ch2 <- num
 			}
 		}
 	}()
+	ch1 <- 1
 
 	for {
 		select {
 		case num := <-ch2:
+			//fmt.Println(num)
 			ch1 <- num
 		}
 	}
@@ -81,9 +90,6 @@ func person4() { //后执行
 func fucisuo() {
 	go person3()
 	go person4()
-	for {
-
-	}
 }
 
 //使用锁完成同步

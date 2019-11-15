@@ -25,10 +25,15 @@ func TestFile(t *testing.T) {
 	//defer f.Close()
 
 	readOnLine("PlayerInfoRecord", "/Users/supozheng/work/xinhun/gamelog/rlog/1_1_data.2019-10-30-15-20")
+	f, _ := os.OpenFile("/Users/supozheng/Downloads/PSCC20192003.zip", os.O_RDONLY, os.ModePerm)
+	finfo, _ := f.Stat()
+	fmt.Println(finfo.Size())
 }
 
 type LogC struct {
 	Length string
+	Date   string
+	Md5    string
 }
 
 func readOnLine(name, file string) {

@@ -16,6 +16,7 @@ import (
 func TestDingshiqi(t *testing.T) {
 
 	fmt.Println("当前时间：", time.Now())
+	start := time.Now()
 
 	// 创建定时器
 	//myTimer := time.NewTimer(time.Second * 2)
@@ -31,6 +32,10 @@ func TestDingshiqi(t *testing.T) {
 	// int32(time.Now().Unix())
 	fmt.Println(time.Now().Unix())
 
+	time.Sleep(time.Second)
+
+	fmt.Println(time.Since(start).Seconds())
+
 }
 
 // 定时器的停止和重置
@@ -41,9 +46,7 @@ func timer1() {
 		fmt.Println("子go程序，定时完毕")
 	}()
 	//mytimer.Stop()
-	for {
-
-	}
+	select {}
 }
 
 // 定时器周期定时
@@ -56,7 +59,5 @@ func timer2() {
 		}
 	}()
 
-	for {
-
-	}
+	select {}
 }

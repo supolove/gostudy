@@ -1,7 +1,13 @@
 package main
 
-import "log"
+import (
+	"fmt"
+)
 
 func main() {
-	log.Fatal("errrrr")
+	a := []int{1, 2, 3}
+
+	for range a {
+		fmt.Println("1")
+	}
 }

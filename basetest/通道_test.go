@@ -2,6 +2,7 @@ package basetest
 
 import (
 	"fmt"
+	"log"
 	"testing"
 	"time"
 )
@@ -11,39 +12,59 @@ import (
 
  */
 
-var channel = make(chan int)
+var channel = make(chan int, 10)
 
 func printer(s string) {
 	for _, ch := range s {
-		fmt.Printf("%c", ch)
+		c := fmt.Sprintf("%c", ch)
+		fmt.Println(c)
 		time.Sleep(300 * time.Millisecond)
 	}
 
 }
 
 func person1() {
-	printer("hello")
-	channel <- 8
+	//printer("hello")
+	for i := 0; i < 5; i++ {
+		channel <- i
+		fmt.Println("写:", i)
+	}
+
 }
 
 func person2() {
 	//num := <- channel
-	<-channel
-	printer("world")
+	for {
+		i := <-channel
+		//fmt.Println("读:",i)
+		log.Print("读:", i, " ")
+		log.Print(len(channel))
+		//printer("world")
+	}
+
 }
 
 func TestTongdao(t *testing.T) {
 	// channel 队列模型
-	// 是一种数据类型，对应一个"管道"（通道）
+	// 是一种数据类型，对应一个"管道"（通道）	<-channel
+	//	printer("world")
 	// 解决协程的同步问题以及协程之间数据共享（数据传递）的问题
 
 	// 写端  ch <- "hello" 	写端写数据，读端不在读，阻塞
 	// 读端  temp <- ch 		读端读数据，同时写端不在写， 读端阻塞
-	go person1()
+
+	fmt.Println("456")
+
 	go person2()
+	//go person1()
 
 	for {
-
+		time.Sleep(time.Second)
+		if len(channel) == 0 {
+			for i := 0; i < 5; i++ {
+				channel <- i
+			}
+		}
 	}
 
 	/*
