@@ -5,6 +5,8 @@ go 1.12
 require (
 	github.com/Unknwon/com v0.0.0-20170213072014-0db4a625e949
 	github.com/VictorLowther/simplexml v0.0.0-20180716164440-0bff93621230
+	github.com/gin-contrib/sse v0.1.0 // indirect
+	github.com/gin-gonic/gin v1.4.0
 
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/go-xorm/core v0.6.0

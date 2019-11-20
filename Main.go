@@ -1,13 +1,12 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"net/http"
 )
 
 func main() {
-	a := []int{1, 2, 3}
 
-	for range a {
-		fmt.Println("1")
-	}
+	log.Println(http.ListenAndServe("127.0.0.1:9000", nil))
+
 }
