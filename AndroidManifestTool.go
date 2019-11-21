@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func main() {
+func main123() {
 
 	readFile, readErr := os.Open("resources/AndroidManifest.xml")
 	if readErr != nil {

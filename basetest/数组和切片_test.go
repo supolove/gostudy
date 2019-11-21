@@ -9,7 +9,7 @@ import (
 )
 
 // 数组
-func shuzu1()  {
+func shuzu1() {
 	// 定义
 	var a [3]int                    // 定义长度为3的int型数组, 元素全部为0
 	var b = [...]int{1, 2, 3}       // 定义长度为3的int型数组, 元素为 1, 2, 3
@@ -30,7 +30,7 @@ func shuzu1()  {
 }
 
 // 切片
-func qiepian1(){
+func qiepian1() {
 	var (
 		a []int               // nil切片, 和 nil 相等, 一般用来表示一个不存在的切片
 		b = []int{}           // 空切片, 和 nil 不相等, 一般用来表示一个空的集合
@@ -54,7 +54,6 @@ func qiepian1(){
 
 	a = append(a[:1], a[1+1:]...) // 删除中间1个元素
 
-
 	// sort
 
 	//SortFloat64FastV1
@@ -75,24 +74,23 @@ func qiepian1(){
 	// 以int方式给float64排序
 	sort.Ints(cc)
 
-
 }
 
 func TestSlience(t *testing.T) {
-	
+
 	shuzu1()
 	/*
-	data := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+		data := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 
-	s1 := data[9:]
-	// 创建长度容量为2的切片
-	s2 := data[:2]
+		s1 := data[9:]
+		// 创建长度容量为2的切片
+		s2 := data[:2]
 
-	fmt.Println(s2)
-	// s1 会替换 s2的元素
-	copy(s2, s1)
+		fmt.Println(s2)
+		// s1 会替换 s2的元素
+		copy(s2, s1)
 
-	fmt.Println(s2)
+		fmt.Println(s2)
 
-	 */
+	*/
 }
