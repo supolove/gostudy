@@ -3,6 +3,7 @@ package basetest
 import (
 	"fmt"
 	"sync"
+	"sync/atomic"
 	"testing"
 	"time"
 )
@@ -17,6 +18,18 @@ go程间channel访问顺序导致死锁
 func TestSuo(t *testing.T) {
 	sisuo3()
 }
+
+// 原子操作
+var total uint64
+func TestYuanzi(t *testing.T){
+	var i uint64
+	for i = 0; i <= 100; i++ {
+		atomic.AddUint64(&total, i)
+	}
+	fmt.Println(total)
+	fmt.Println(i)
+}
+
 
 // 1.同一个goroutine中，使用同一个 channel 读写。
 func sisuo1() {
