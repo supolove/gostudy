@@ -1,4 +1,4 @@
-package basetest
+package sjms
 
 import (
 	"fmt"
