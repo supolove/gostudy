@@ -7,8 +7,16 @@ import (
 
 // 字典，映射， key-value， key唯一
 func TestMap(t *testing.T) {
-	var m1 map[int]string
+	var m1 map[string]string
 	fmt.Println(m1 == nil)
+	m1 = make(map[string]string)
+	m1["aa"] = "bb"
+	v, ok := m1["aa"]
+	if ok {
+		fmt.Println(v)
+	}
+
+	fmt.Println(len(m1))
 
 	m2 := map[int]string{}
 	m2[1] = "shengli"

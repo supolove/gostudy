@@ -1,6 +1,7 @@
 package basetest
 
 import (
+	"fmt"
 	"testing"
 	"time"
 )
@@ -31,4 +32,33 @@ func TestBingfa(t *testing.T) {
 	go func() {
 		time.Sleep(2)
 	}()
+}
+
+// 控制并发数，godoc， vfs 虚拟文件系统
+// vfs/gatefs 控制访问该虚拟文件系统的最大并发数
+func bingfa111() {
+	/*
+		fs := gatefs.New(vfs.OS("/path"), make(chan bool, 8))
+		f :=fs.String()
+		ff,_ := fs.Lstat("")
+		ff.IsDir()
+	*/
+}
+
+func TestChanSuijishu(t *testing.T) {
+	ch := make(chan int)
+	go func() {
+		for i := 0; i < 20; i++ {
+			select {
+			case ch <- 0:
+			case ch <- 1:
+			case ch <- 2:
+			case ch <- 3:
+			}
+		}
+	}()
+
+	for v := range ch {
+		fmt.Println(v)
+	}
 }

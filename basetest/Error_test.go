@@ -48,3 +48,21 @@ func TestError(t *testing.T) {
 	}
 
 }
+
+func TestError2(t *testing.T) {
+
+	type CallerInfo struct {
+		FuncName string
+		FileName string
+		FileLine int
+	}
+
+	type Error interface {
+		Caller() []CallerInfo
+		Wraped() []error
+		Code() int
+		error
+
+		private()
+	}
+}

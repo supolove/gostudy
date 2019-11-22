@@ -20,16 +20,37 @@ func TestSuo(t *testing.T) {
 }
 
 // 原子操作
+
+/*
+原子操作配合互斥锁可以实现非常高效的单件模式。
+互斥锁的代价比普通整数的原子读写高很多，
+在性能敏感的地方可以增加一个数字型的标志位，
+通过原子检测标志位状态降低互斥锁的使用次数来提高性能。
+*/
 var total uint64
-func TestYuanzi(t *testing.T){
+
+//var total struct {
+//	sync.Mutex
+//	value int
+//}
+
+func worker2(wg *sync.WaitGroup) {
+	defer wg.Done()
+
 	var i uint64
 	for i = 0; i <= 100; i++ {
-		atomic.AddUint64(&total, i)
+		atomic.AddUint64(&total, 1)
+		fmt.Println(total)
 	}
-	fmt.Println(total)
-	fmt.Println(i)
 }
+func TestYuanzi(t *testing.T) {
+	var wg sync.WaitGroup
+	wg.Add(2)
 
+	go worker2(&wg)
+	go worker2(&wg)
+	wg.Wait()
+}
 
 // 1.同一个goroutine中，使用同一个 channel 读写。
 func sisuo1() {

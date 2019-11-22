@@ -13,6 +13,7 @@ require (
 	github.com/go-xorm/xorm v0.7.9
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/pkg/errors v0.8.1
+	golang.org/x/tools v0.0.0-20191121040551-947d4aa89328 // indirect
 	golang.org/x/tour v0.0.0-20190829165821-3c9f1af8b2da
 	xorm.io/core v0.7.2-0.20190928055935-90aeac8d08eb
 )
