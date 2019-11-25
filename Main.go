@@ -3,63 +3,32 @@ package main
 import (
 	"bytes"
 	"fmt"
-	"os"
+	"os/exec"
 	"time"
 )
 
-var a string
-var done chan int
-
-func setup() {
-	a = "hello, world"
-	time.Sleep(time.Second * 5)
-	done <- 1
-}
-
-var cccc chan int
-
-func testBinxing4(i int) {
-	go func() {
-		d := <-cccc
-		if i == d {
-			fmt.Println("is true")
-		} else {
-			fmt.Println("is false")
-		}
-
-	}()
-}
-
 func main() {
 
-	/*
-		fmt.Println("start")
+	for range time.Tick(time.Duration(time.Second * 30)) {
+		//fmt.Println("tick",time.Now())
+		bufOut := new(bytes.Buffer)
+		bufErr := new(bytes.Buffer)
 
-		f := os.Stdin
+		cmd := exec.Command("git", "pull")
+		cmd.Dir = "."
+		cmd.Stdout = bufOut
+		cmd.Stderr = bufErr
 
-		data, err := ioutil.ReadAll(f)
+		err := cmd.Run()
 
 		if err != nil {
 			panic(err)
 		}
-		fmt.Println(data)
-	*/
 
-	var buf bytes.Buffer
-	si, _ := buf.ReadFrom(os.Stdin)
-	fmt.Println(si)
-
-	/*
-		reader := bufio.NewReader(os.Stdin)
-
-		result, err := reader.ReadString('\n')
-		if err != nil {
-
-			fmt.Println("read error:", err)
+		if len(bufErr.Bytes()) > 0 {
+			panic(bufErr.String())
 		}
 
-
-		fmt.Println("result:", result)
-
-	*/
+		fmt.Println(bufOut.String())
+	}
 }
