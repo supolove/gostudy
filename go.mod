@@ -9,6 +9,7 @@ require (
 	github.com/gin-gonic/gin v1.4.0
 	github.com/go-playground/universal-translator v0.17.0 // indirect
 	github.com/go-playground/validator v9.30.0+incompatible
+	github.com/go-redis/redis/v7 v7.0.0-beta.4
 
 	github.com/go-sql-driver/mysql v1.4.1
 	github.com/go-xorm/core v0.6.0
