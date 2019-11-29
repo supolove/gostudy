@@ -1,9 +1,18 @@
-package main
+package 数据结构
 
 import (
 	"container/heap"
 	"fmt"
+	"testing"
 )
+
+/*
+type Interface interface {
+    sort.Interface
+    Push(x interface{}) // add x as element Len()
+    Pop() interface{}   // remove and return element Len() - 1.
+}
+*/
 
 type IntHeap []int
 
@@ -23,7 +32,7 @@ func (h *IntHeap) Pop() interface{} {
 	return x
 }
 
-func main() {
+func TestHeap(t *testing.T) {
 	h := &IntHeap{2, 1, 5}
 	heap.Init(h)
 	heap.Push(h, 3)

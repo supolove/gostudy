@@ -2,6 +2,7 @@ package basetest
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"github.com/Unknwon/com"
 	"io"
@@ -141,4 +142,32 @@ func testRead() {
 		fmt.Println(string(buf))
 	}
 
+}
+
+func TestSectionReader_Seek(t *testing.T) {
+	// Verifies that NewSectionReader's Seeker behaves like bytes.NewReader (which is like strings.NewReader)
+	br := bytes.NewReader([]byte("foo"))
+	sr := io.NewSectionReader(br, 0, int64(len("foo")))
+
+	for _, whence := range []int{io.SeekStart, io.SeekCurrent, io.SeekEnd} {
+		for offset := int64(-3); offset <= 4; offset++ {
+			brOff, brErr := br.Seek(offset, whence)
+			srOff, srErr := sr.Seek(offset, whence)
+			if (brErr != nil) != (srErr != nil) || brOff != srOff {
+				t.Errorf("For whence %d, offset %d: bytes.Reader.Seek = (%v, %v) != SectionReader.Seek = (%v, %v)",
+					whence, offset, brOff, brErr, srErr, srOff)
+			}
+		}
+	}
+
+	// And verify we can just seek past the end and get an EOF
+	got, err := sr.Seek(100, io.SeekStart)
+	if err != nil || got != 100 {
+		t.Errorf("Seek = %v, %v; want 100, nil", got, err)
+	}
+
+	n, err := sr.Read(make([]byte, 10))
+	if n != 0 || err != io.EOF {
+		t.Errorf("Read = %v, %v; want 0, EOF", n, err)
+	}
 }
