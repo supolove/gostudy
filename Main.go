@@ -3,6 +3,7 @@ package main
 import (
 	"container/heap"
 	"fmt"
+	"net"
 )
 
 type IntHeap []int
@@ -31,5 +32,23 @@ func main() {
 	for h.Len() > 0 {
 		fmt.Println(heap.Pop(h))
 	}
+
+	l, err := net.Listen("tcp", ":8888")
+	if err != nil {
+		fmt.Println("listen error:", err)
+	}
+
+	for {
+		c, err := l.Accept()
+		if err != nil {
+			fmt.Println("accept error:", err)
+			break
+		}
+		go netHandleConn(c)
+	}
+
+}
+
+func netHandleConn(c net.Conn) {
 
 }
