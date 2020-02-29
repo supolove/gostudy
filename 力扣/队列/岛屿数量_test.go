@@ -1,6 +1,7 @@
 package 队列
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -33,64 +34,63 @@ import (
 向下搜索，如果遇到1则合并再继续搜索，遇到0则结束
 */
 
+type Position struct {
+	X int
+	Y int
+}
+
 func numIslands(grid [][]byte) int {
 	if len(grid) == 0 {
 		return 0
 	}
 
-	x, y := 0, 0
-	q := make(chan int, 20)
-	m := map[int]int{}
+	var q []Position
 
-	// 使用广度搜索
-	go func() {
-		for {
-
-			if grid[x][y] == 1 {
-				m[1000*x+y] = 1
-				grid[x][y] = 0
-			}
-
-			if x < len(grid)-1 && grid[x+1][y] == 1 {
-				x = x + 1
-				continue
-			}
-
-			if y < len(grid[0])-1 && grid[x][y+1] == 1 {
-				y = y + 1
-				continue
-			}
-
-			if x == len(grid)-1 && y == len(grid[0])-1 {
-				x = 0
-				y = 0
-				continue
-			}
-
-		}
-	}()
-	go func() {
-		for {
-			posiction := <-q
-			x = posiction / 1000
-			y = posiction % 1000
-			println("x:", x, "y:", y)
-		}
-	}()
-
-	return 0
-}
-
-func addToQueue(x, y int, m map[int]int, q chan int) {
-	println("=== x:", x, "y:", y)
-	if _, ok := m[x*1000+y]; !ok {
-		q <- x*1000 + y
-		m[x*1000+y] = 1
+	isIsland := func(x, y int) bool {
+		return 0 <= x && x < len(grid) && 0 <= y && y < len(grid[0]) && grid[x][y] == '1'
 	}
-}
 
-func searchIsLands(x, y int, grid [][]byte) {
+	// 将陆地旁边的陆地放入探险队列
+	checkAndEnqueue := func(x, y int) {
+		if isIsland(x-1, y) {
+			q = append(q, Position{x - 1, y})
+		}
+		if isIsland(x+1, y) {
+			q = append(q, Position{x + 1, y})
+		}
+		if isIsland(x, y-1) {
+			q = append(q, Position{x, y - 1})
+		}
+		if isIsland(x, y+1) {
+			q = append(q, Position{x, y + 1})
+		}
+	}
 
+	ans := 0
+
+	for i := 0; i < len(grid); i++ {
+		for j := 0; j < len(grid[0]); j++ {
+			// 第一次碰到陆地
+			if grid[i][j] == 1 {
+				q = append(q, Position{i, j})
+				ans++
+
+				// 探索这块岛屿所有相连的陆地
+				for len(q) != 0 {
+					root := q[0]
+					q = q[1:]
+					if grid[root.X][root.Y] == 0 {
+						continue
+					}
+					// 标记为已探索
+					grid[root.X][root.Y] = 0
+					// 将相连的陆地放入探险队列
+					checkAndEnqueue(root.X, root.Y)
+				}
+			}
+		}
+	}
+	return ans
 }
 
 func TestDaoyu(t *testing.T) {
@@ -99,9 +99,6 @@ func TestDaoyu(t *testing.T) {
 		{1, 1, 0},
 		{0, 1, 0},
 	}
-	numIslands(b)
-
-	for {
-
-	}
+	n := numIslands(b)
+	fmt.Println(n)
 }
