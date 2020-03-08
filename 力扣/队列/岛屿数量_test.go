@@ -32,6 +32,9 @@ import (
 只要找到1就必定有岛屿
 找到1向右搜索，如果遇到1则合并再继续搜索，遇到0则结束
 向下搜索，如果遇到1则合并再继续搜索，遇到0则结束
+
+url:
+https://leetcode-cn.com/explore/learn/card/queue-stack/217/queue-and-bfs/872/
 */
 
 type Position struct {
