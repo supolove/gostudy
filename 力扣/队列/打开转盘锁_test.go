@@ -2,13 +2,11 @@ package 队列
 
 import (
 	"fmt"
-	"sort"
 	"strconv"
 	"testing"
 )
 
-/*
-
+/**
 说明：
 你有一个带有四个圆形拨轮的转盘锁。每个拨轮都有10个数字： '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' 。
 每个拨轮可以自由旋转：例如把 '9' 变为  '0'，'0' 变为 '9' 。每次旋转都只能旋转一个拨轮的一位数字。
@@ -49,76 +47,99 @@ import (
 死亡列表 deadends 的长度范围为 [1, 500]。
 目标数字 target 不会在 deadends 之中。
 每个 deadends 和 target 中的字符串的数字会在 10,000 个可能的情况 '0000' 到 '9999' 中产生。
+
+
+解题思路:
+使用广度搜索算法
+自己不会写，从解中copy了一个过来，基本思路是从0000开始找，先找一步能走到的所有
+（1000，9000，0100,0900,0010,0090,0001,0009），加到队列里，
+如果这中间找到了target，直接返回步数，
+如果碰到了deadend中的一个，则退出循环继续找，相当于不把deadend中的入队，也就不会接着这一个继续找，
+从而路径中不会包含带deadend中的坐标；那么如果找到的这一个不再deadend中，就把他添加到队列中，
+在下一层的循环中接着找。直到找到target，这就是最短的路径。也就是BFS广度优先搜索。
 */
 
-// 旋转
-func turn() {
-
-}
-
-//
-
 func openLock(deadends []string, target string) int {
-	// 优化把[]string数组转换为4个Int类型数组
-	arr1 := []int{}
-	arr2 := []int{}
-	arr3 := []int{}
-	arr4 := []int{}
-	/*
-		appendArr := func(arr []int, vs string) {
-			v,_:= strconv.Atoi(vs)
-			i := sort.SearchInts(arr, v)
-			if !(i < len(arr) && arr[i] == v) {
-				arr = append(arr, v)
-				sort.IntsAreSorted(arr)
-			}
-		}*/
-
-	for _, ss := range deadends {
-		//appendArr(arr1, ss[0:1])
-		//appendArr(arr2, ss[1:2])
-		//appendArr(arr3, ss[2:3])
-		//appendArr(arr4, ss[3:4])
-
-		v1, _ := strconv.Atoi(ss[0:1])
-		sort1 := sort.SearchInts(arr1, v1)
-		if !(sort1 < len(arr1) && arr1[sort1] == v1) {
-			arr1 = append(arr1, v1)
-			sort.Ints(arr1)
-		}
-
-		v2, _ := strconv.Atoi(ss[1:2])
-		sort2 := sort.SearchInts(arr2, v2)
-		if !(sort2 < len(arr2) && arr2[sort2] == v2) {
-			arr2 = append(arr2, v2)
-			sort.Ints(arr2)
-		}
-
-		v3, _ := strconv.Atoi(ss[2:3])
-		sort3 := sort.SearchInts(arr3, v3)
-		if !(sort3 < len(arr3) && arr3[sort3] == v3) {
-			arr3 = append(arr3, v3)
-			sort.Ints(arr3)
-		}
-
-		v4, _ := strconv.Atoi(ss[3:4])
-		sort4 := sort.SearchInts(arr4, v4)
-		if !(sort4 < len(arr4) && arr4[sort4] == v4) {
-			arr4 = append(arr4, v4)
-			sort.Ints(arr4)
-		}
+	m := make(map[string]interface{})
+	for _, i := range deadends {
+		m[i] = 0
 	}
 
-	fmt.Println(arr1)
-	fmt.Println(arr2)
-	fmt.Println(arr3)
-	fmt.Println(arr4)
+	isInDeadends := func(item string) bool {
+		_, ok := m[item]
+		return ok
+	}
 
-	return 0
+	makeValue := func(v string, v1 int, idx int) string {
+		if idx == 0 {
+			return strconv.Itoa(v1) + v[idx+1:]
+		}
+
+		if idx == 3 {
+			return v[:idx] + strconv.Itoa(v1)
+		}
+
+		return v[idx-1:idx] + strconv.Itoa(v1) + v[idx:]
+	}
+
+	addValue := func(v string, idx int) string {
+		fmt.Println("str=", v, "idx=", idx)
+		v1, _ := strconv.Atoi(v[idx : idx+1])
+		if v1 != 9 {
+			v1++
+		} else {
+			v1 = 0
+		}
+		return makeValue(v, v1, idx)
+	}
+	reduceValue := func(v string, idx int) string {
+		v1, _ := strconv.Atoi(v[idx : idx+1])
+		if v1 != 0 {
+			v1--
+		} else {
+			v1 = 9
+		}
+		return makeValue(v, v1, idx)
+	}
+
+	start := "0000"
+	var q []string
+	q = append(q, start)
+	nums := 0
+	for {
+		if len(q) > 0 {
+			for idx := range q {
+				item := q[idx]
+				nums++
+				if item == target {
+					return nums
+				}
+				q = q[1:]
+				for i := 0; i < 4; i++ {
+					r := addValue(item, i)
+					if !isInDeadends(r) {
+						q = append(q, r)
+					}
+				}
+				for i := 0; i < 4; i++ {
+					r := reduceValue(item, i)
+					if !isInDeadends(r) {
+						q = append(q, r)
+					}
+				}
+			}
+		} else {
+			return -1
+		}
+	}
 }
 
 func TestZhuanpan(t *testing.T) {
-	arr := []string{"0201", "0101", "1212", "2002"}
+	arr := []string{
+		"0201",
+		"0101",
+		"1212",
+		"2002"}
 	target := "0202"
 	openLock(arr, target)
 }
