@@ -60,6 +60,9 @@ import (
 */
 
 func openLock(deadends []string, target string) int {
+	if target == "0000" {
+		return -1
+	}
 	m := make(map[string]interface{})
 	for _, i := range deadends {
 		m[i] = 0
@@ -78,12 +81,11 @@ func openLock(deadends []string, target string) int {
 		if idx == 3 {
 			return v[:idx] + strconv.Itoa(v1)
 		}
-
-		return v[idx-1:idx] + strconv.Itoa(v1) + v[idx:]
+		mv := v[0:idx] + strconv.Itoa(v1) + v[idx+1:]
+		return mv
 	}
 
 	addValue := func(v string, idx int) string {
-		fmt.Println("str=", v, "idx=", idx)
 		v1, _ := strconv.Atoi(v[idx : idx+1])
 		if v1 != 9 {
 			v1++
@@ -102,32 +104,39 @@ func openLock(deadends []string, target string) int {
 		return makeValue(v, v1, idx)
 	}
 
+	// 层次，值
+	type VP struct {
+		Floor int
+		Value string
+	}
+
 	start := "0000"
-	var q []string
-	q = append(q, start)
-	nums := 0
+	m[start] = 0
+	var q []VP
+	q = append(q, VP{0, start})
 	for {
 		if len(q) > 0 {
-			for idx := range q {
-				item := q[idx]
-				nums++
-				if item == target {
-					return nums
-				}
-				q = q[1:]
-				for i := 0; i < 4; i++ {
-					r := addValue(item, i)
-					if !isInDeadends(r) {
-						q = append(q, r)
-					}
-				}
-				for i := 0; i < 4; i++ {
-					r := reduceValue(item, i)
-					if !isInDeadends(r) {
-						q = append(q, r)
-					}
+			item := q[0]
+			//fmt.Println(item)
+			if item.Value == target {
+				return item.Floor
+			}
+			q = q[1:]
+			for i := 0; i < 4; i++ {
+				r := addValue(item.Value, i)
+				if !isInDeadends(r) {
+					q = append(q, VP{item.Floor + 1, r})
+					m[r] = 0
 				}
 			}
+			for i := 0; i < 4; i++ {
+				r := reduceValue(item.Value, i)
+				if !isInDeadends(r) {
+					q = append(q, VP{item.Floor + 1, r})
+					m[r] = 0
+				}
+			}
+
 		} else {
 			return -1
 		}
@@ -141,5 +150,74 @@ func TestZhuanpan(t *testing.T) {
 		"1212",
 		"2002"}
 	target := "0202"
-	openLock(arr, target)
+	result := openLock2(arr, target)
+	fmt.Println("result = ", result)
+}
+
+/**
+网友最短时间解法
+*/
+//官方解法只有一种 bfs
+
+func openLock2(deadends []string, target string) int {
+	if target == "0000" {
+		return 0
+	}
+
+	visited := make(map[string]bool)
+	for _, v := range deadends {
+		if v == "0000" {
+			return -1
+		}
+		visited[v] = true
+	}
+
+	// bfs --------------------------------------------------------------
+	startQueue := make(map[string]bool) // 构造处理字符串队列。用于从起点侧开始搜索
+	startQueue["0000"] = true           // 起点
+	endQueue := make(map[string]bool)   // 构造处理字符串队列。用于从终点侧开始搜索
+	endQueue[target] = true
+
+	return bfs(startQueue, endQueue, visited, 0) // count从0开始
+}
+
+//81% 100%
+// bfs. 用BFS模拟了双向搜索的步骤。 count为第几步
+func bfs(start, end, visited map[string]bool, count int) int {
+	if len(start) <= 0 {
+		return -1
+	} // 出现断层 (就是start这边搜索不到过去target的路径了，其队列就没有东西存着)
+	if len(start) > len(end) { // 从小的那一端开始
+		return bfs(end, start, visited, count)
+	}
+
+	change := []uint8{9, 1}        // 转动数字的增量。9代表向后反转。注意要是uint8（byte是它的别名）
+	nexts := make(map[string]bool) //存储start端搜索的下一步需要处理的状态点字符串
+	var curSlice []byte
+	var origin byte
+	var nextStr string // 下一步的状态（字符串）
+
+	// 处理start队列（从队头到队尾，这由slice遍历机制决定）
+	for cur := range start {
+		visited[cur] = true      // 标记为已访问
+		curSlice = []byte(cur)   // 字符串转为[]byte
+		for i := 0; i < 4; i++ { // 遍历四位数字（四个轮盘状态）
+			origin = curSlice[i]     // 备份当前字符
+			for j := 0; j < 2; j++ { // 正反转动
+				curSlice[i] = (curSlice[i]-'0'+change[j])%10 + '0'
+				nextStr = string(curSlice)
+				if !visited[nextStr] {
+					if _, ok := end[nextStr]; ok { // end队列也有，说明碰撞了，下一步就可以见面
+						count++
+						return count
+					} else {
+						nexts[nextStr] = true
+					}
+				}
+				curSlice[i] = origin // 复原单词
+			}
+		}
+	}
+	count++
+	return bfs(nexts, end, visited, count)
 }
