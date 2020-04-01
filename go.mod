@@ -20,7 +20,7 @@ require (
 	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646
 	github.com/pkg/errors v0.8.1
 	github.com/shiena/ansicolor v0.0.0-20151119151921-a422bbe96644 // indirect
-	golang.org/x/tools v0.0.0-20191121040551-947d4aa89328 // indirect
+	golang.org/x/tools v0.0.0-20191121040551-947d4aa89328
 	golang.org/x/tour v0.0.0-20190829165821-3c9f1af8b2da
 	gopkg.in/ini.v1 v1.52.0 // indirect
 

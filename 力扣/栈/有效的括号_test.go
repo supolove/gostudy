@@ -2,6 +2,7 @@ package 栈
 
 import (
 	"fmt"
+	"strings"
 	"testing"
 )
 
@@ -134,6 +135,16 @@ func isValid(s string) bool {
 	}
 
 	return false
+}
+
+// 最简单的实现
+func isValid2(s string) bool {
+	for strings.Contains(s, "()") || strings.Contains(s, "[]") || strings.Contains(s, "{}") {
+		s = strings.Replace(s, "()", "", 1)
+		s = strings.Replace(s, "[]", "", 1)
+		s = strings.Replace(s, "{}", "", 1)
+	}
+	return s == ""
 }
 
 func Test_IsValid(t *testing.T) {
