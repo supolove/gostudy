@@ -1,7 +1,7 @@
 package service
 
 import (
-	interf "gostudy/rpc/gorpc/interface"
+	interf2 "gostudy/总结/rpc/gorpc/interface"
 	"log"
 	"net"
 	"net/rpc"
@@ -37,7 +37,7 @@ func main1() {
 /* 2.0 */
 const HelloServiceName = "path/to/pkg.HelloService"
 
-func RegisterHelloService(svc interf.HelloInterface) error {
+func RegisterHelloService(svc interf2.HelloInterface) error {
 	return rpc.RegisterName(HelloServiceName, svc)
 }
 

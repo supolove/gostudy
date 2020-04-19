@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	interf2 "gostudy/rpc/gorpc/interface"
+	"gostudy/总结/rpc/gorpc/interface"
 	"log"
 	"net/rpc"
 )
@@ -29,7 +29,7 @@ type HelloServiceClient struct {
 }
 
 func (p *HelloServiceClient) Hello(request string, reply *string) error {
-	return p.Client.Call(interf2.HelloServiceName+".Hello", request, reply)
+	return p.Client.Call(interf.HelloServiceName+".Hello", request, reply)
 }
 
 //var _ interf.HelloInterface = (*HelloServiceClient)(nil)
