@@ -45,7 +45,9 @@ func arrayPairSum(nums []int) int {
 // 使用快速排序
 func arrayPairSum2(nums []int) int {
 
+	// {4, 8, 2, 9 ,5 ,11 ,1 ,3 ,6 ,7}
 	partition := func(a []int, low, high int) int {
+		fmt.Println(a, low, high)
 		x := a[low]
 		i := low
 		j := high
@@ -75,6 +77,7 @@ func arrayPairSum2(nums []int) int {
 	}
 
 	quicksort(nums, 0, len(nums)-1)
+	fmt.Println(nums)
 
 	result := 0
 	for i := 0; i < len(nums); i++ {
@@ -109,5 +112,5 @@ func arrayPairSum3(nums []int) int {
 }
 
 func Test_arrayPairSum(t *testing.T) {
-	fmt.Println(arrayPairSum2([]int{4, 3, 2, 1}))
+	fmt.Println(arrayPairSum2([]int{4, 8, 2, 9, 5, 11, 1, 3, 6, 7}))
 }
