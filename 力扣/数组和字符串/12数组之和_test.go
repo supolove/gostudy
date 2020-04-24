@@ -21,6 +21,21 @@ func twoSum1(numbers []int, target int) []int {
 	return []int{}
 }
 
+func twoSum(numbers []int, target int) []int {
+	i := 0
+	j := len(numbers) - 1
+	for {
+		sums := numbers[i] + numbers[j]
+		if sums > target {
+			j--
+		} else if sums < target {
+			i++
+		} else {
+			return []int{i + 1, j + 1}
+		}
+	}
+}
+
 func Test_twoSum(t *testing.T) {
-	fmt.Println(twoSum1([]int{2, 7, 11, 15}, 9))
+	fmt.Println(twoSum([]int{2, 7, 11, 15}, 9))
 }
