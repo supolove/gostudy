@@ -17,6 +17,16 @@ func getRow(rowIndex int) []int {
 			if temArr == nil {
 				arr[j] = 1
 			} else {
+				/*
+					switch j {
+					case 0:
+						arr[j] = temArr[j]
+					case len(temArr):
+						arr[j] = temArr[j-1]
+					default:
+						arr[j] = temArr[j-1] + temArr[j]
+					}
+				*/
 				if j == 0 {
 					arr[j] = temArr[j]
 				} else if j == len(temArr) {
