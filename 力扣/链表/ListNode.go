@@ -12,3 +12,16 @@ func createSimpleListNode() *ListNode {
 	node2.Next = &ListNode{Val: 0, Next: &ListNode{Val: -4, Next: node2}}
 	return node
 }
+
+func printListNode(list *ListNode) {
+	c := list
+	for c != nil {
+		print(c.Val, " ")
+		c = c.Next
+	}
+	println()
+}
+
+func createNode(val int) *ListNode {
+	return &ListNode{Val: val}
+}
