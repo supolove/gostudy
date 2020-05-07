@@ -12,4 +12,5 @@ func moban() bool {
 			return true
 		}
 	}
+	return false
 }
