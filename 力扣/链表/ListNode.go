@@ -6,10 +6,17 @@ type ListNode struct {
 }
 
 func createSimpleListNode() *ListNode {
-	node := &ListNode{Val: 1}
-	node2 := &ListNode{Val: 2}
+	node := createNode(1)
+	node2 := createNode(2)
+	node3 := createNode(3)
+	node4 := createNode(4)
+	node5 := createNode(5)
+
 	node.Next = node2
-	node2.Next = &ListNode{Val: 2, Next: &ListNode{Val: 4, Next: nil}}
+	node2.Next = node3
+	node3.Next = node4
+	node4.Next = node5
+
 	return node
 }
 
