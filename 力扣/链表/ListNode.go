@@ -9,7 +9,7 @@ func createSimpleListNode() *ListNode {
 	node := &ListNode{Val: 1}
 	node2 := &ListNode{Val: 2}
 	node.Next = node2
-	node2.Next = &ListNode{Val: 3, Next: &ListNode{Val: 4, Next: nil}}
+	node2.Next = &ListNode{Val: 2, Next: &ListNode{Val: 4, Next: nil}}
 	return node
 }
 
