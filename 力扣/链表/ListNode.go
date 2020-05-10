@@ -22,9 +22,15 @@ func createSimpleListNode() *ListNode {
 
 func printListNode(list *ListNode) {
 	c := list
-	for c != nil {
+
+	for i := 0; c != nil; i++ {
 		print(c.Val, " ")
 		c = c.Next
+		if i > 100 {
+			println()
+			println("超出100个元素")
+			break
+		}
 	}
 	println()
 }
