@@ -2,15 +2,13 @@ package 链表
 
 import (
 	"fmt"
+	. "gostudy/力扣/链表/node13"
 	"testing"
 )
 
-type Node struct {
-	Val   int
-	Prev  *Node
-	Next  *Node
-	Child *Node
-}
+/**
+https://leetcode-cn.com/explore/learn/card/linked-list/197/conclusion/764/
+*/
 
 func flatten(root *Node) *Node {
 	cur := root

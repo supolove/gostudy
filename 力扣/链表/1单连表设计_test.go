@@ -2,16 +2,13 @@ package 链表
 
 import (
 	"fmt"
+	. "gostudy/力扣/链表/node1"
 	"testing"
 )
 
 /*
 https://leetcode-cn.com/explore/learn/card/linked-list/193/singly-linked-list/741/
 */
-type Node2 struct {
-	Val  int
-	Next *Node
-}
 
 type MySingleLinkedList struct {
 	HeadNode *Node
