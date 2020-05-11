@@ -8,7 +8,7 @@ import (
 /*
 https://leetcode-cn.com/explore/learn/card/linked-list/193/singly-linked-list/741/
 */
-type Node struct {
+type Node2 struct {
 	Val  int
 	Next *Node
 }
