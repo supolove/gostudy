@@ -1,54 +1,26 @@
 package main
 
 import (
-	"container/heap"
 	"fmt"
-	"net"
+	"github.com/Unknwon/com"
+	"math"
+	"strings"
 )
 
-type IntHeap []int
-
-func (h IntHeap) Len() int           { return len(h) }
-func (h IntHeap) Less(i, j int) bool { return h[i] < h[j] }
-func (h IntHeap) Swap(i, j int)      { h[i], h[j] = h[j], h[i] }
-
-func (h *IntHeap) Push(x interface{}) {
-	*h = append(*h, x.(int))
-}
-
-func (h *IntHeap) Pop() interface{} {
-	old := *h
-	n := len(old)
-	x := old[n-1]
-	*h = old[0 : n-1]
-	return x
-}
-
 func main() {
-	h := &IntHeap{2, 1, 5}
-	heap.Init(h)
-	heap.Push(h, 3)
-	heap.Push(h, 8)
-	for h.Len() > 0 {
-		fmt.Println(heap.Pop(h))
+
+	versionName := "9.9.9"
+	versionCode := 0
+
+	fmt.Println(math.Pow10(3))
+
+	vns := strings.Split(versionName, ".")
+	for i, vn := range vns {
+		v, _ := com.StrTo(vn).Int()
+		x := int(math.Pow10((len(vns) - i - 1) * 2))
+		versionCode += v * x
+		//com.ex
 	}
-
-	l, err := net.Listen("tcp", ":8888")
-	if err != nil {
-		fmt.Println("listen error:", err)
-	}
-
-	for {
-		c, err := l.Accept()
-		if err != nil {
-			fmt.Println("accept error:", err)
-			break
-		}
-		go netHandleConn(c)
-	}
-
-}
-
-func netHandleConn(c net.Conn) {
+	fmt.Println(versionCode)
 
 }
