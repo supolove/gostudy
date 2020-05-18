@@ -55,7 +55,7 @@ type MyHashSet struct {
 }
 
 /** Initialize your data structure here. */
-func Constructor() MyHashSet {
+func Constructor1() MyHashSet {
 	return MyHashSet{
 		set: make([]byte, 100),
 	}
@@ -94,7 +94,7 @@ func (this *MyHashSet) Contains(key int) bool {
 }
 
 func Test_MyHashSet(t *testing.T) {
-	obj := Constructor()
+	obj := Constructor1()
 	obj.Add(1)
 	obj.Add(2)
 	fmt.Println(obj.Contains(1))
