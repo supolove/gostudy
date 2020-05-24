@@ -95,6 +95,32 @@ func isValidSudoku2(board [][]byte) bool {
 	return true
 }
 
+func isValidSudoku3(board [][]byte) bool {
+	// 记录行，某位数字是否被摆放
+	var row [9][9]bool
+	// 记录列，某位数字是否被摆放
+	var col [9][9]bool
+	// 记录某3x3宫格内，某位数字是否被摆放
+	var block [9][9]bool
+
+	for i := 0; i < 9; i++ {
+		for j := 0; j < 9; j++ {
+			if board[i][j] != '.' {
+				num := board[i][j] - '1'
+				blockIndex := i/3*3 + j/3
+				if row[i][num] || col[j][num] || block[blockIndex][num] {
+					return false
+				} else {
+					row[i][num] = true
+					col[j][num] = true
+					block[blockIndex][num] = true
+				}
+			}
+		}
+	}
+	return true
+}
+
 func Test_isValidSudoku(t *testing.T) {
 	arr := [][]byte{
 		{'5', '3', '.', '.', '7', '.', '.', '.', '.'},
@@ -107,5 +133,5 @@ func Test_isValidSudoku(t *testing.T) {
 		{'.', '.', '.', '4', '1', '9', '.', '.', '5'},
 		{'.', '.', '.', '.', '8', '.', '.', '7', '9'},
 	}
-	fmt.Println(isValidSudoku(arr))
+	fmt.Println(isValidSudoku3(arr))
 }
