@@ -11,7 +11,7 @@ type MyHashMap struct {
 }
 
 /** Initialize your data structure here. */
-func Constructor() MyHashMap {
+func Constructor2() MyHashMap {
 	return MyHashMap{
 		Set: [1000000]int{},
 	}
