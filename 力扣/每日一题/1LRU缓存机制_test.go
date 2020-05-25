@@ -5,6 +5,10 @@ import (
 	"testing"
 )
 
+/*
+https://leetcode-cn.com/problems/lru-cache/
+*/
+
 type LRUCache struct {
 	arr []int
 	m   map[int]int
