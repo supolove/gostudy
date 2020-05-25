@@ -22,9 +22,5 @@ func TestRing(t *testing.T) {
 		s += p.(int)
 	})
 
-	r.Do(func(p interface{}) {
-		s += p.(int)
-	})
-
 	fmt.Println("sum is", s)
 }
