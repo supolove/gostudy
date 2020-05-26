@@ -50,7 +50,7 @@ func search2(nums []int, target int) int {
 			// 中间+1
 			left = mid + 1
 		} else {
-			right = right - 1
+			right = mid - 1
 		}
 	}
 	return -1

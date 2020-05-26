@@ -7,6 +7,7 @@ import (
 
 /*
 https://leetcode-cn.com/problems/lru-cache/
+2020-05-25
 */
 
 type LRUCache struct {
