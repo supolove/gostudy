@@ -32,6 +32,32 @@ func climbStairs(n int) int {
 	return digui2(n, map[int]int{})
 }
 
+// 动态规划
+func climbStairs2(n int) int {
+	if n == 1 {
+		return 1
+	}
+
+	dp := make([]int, n+1)
+	dp[1] = 1
+	dp[2] = 2
+	for i := 3; i <= n; i++ {
+		dp[i] = dp[i-1] + dp[i-2]
+	}
+	return dp[n]
+}
+
+// 滚动数组
+func climbStairs3(n int) int {
+	p, q, r := 0, 0, 1
+	for i := 0; i <= n; i++ {
+		p = q
+		q = r
+		r = p + q
+	}
+	return r
+}
+
 func Test(t *testing.T) {
-	fmt.Println(climbStairs(5))
+	fmt.Println(climbStairs3(5))
 }
