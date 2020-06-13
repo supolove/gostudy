@@ -1,4 +1,4 @@
-package 每日一题
+package _0_06
 
 import "testing"
 
