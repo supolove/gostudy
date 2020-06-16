@@ -30,21 +30,21 @@ func (this *Codec) serialize(root *TreeNode) string {
 	this.Root = root
 	var queue []*TreeNode
 	queue = append(queue, root)
-	res := ""
+	builder := strings.Builder{}
 	for len(queue) > 0 {
 		root = queue[0]
 		queue = queue[1:]
 		if root != nil {
-			res += strconv.Itoa(root.Val)
+			builder.WriteString(strconv.Itoa(root.Val))
 			queue = append(queue, root.Left)
 			queue = append(queue, root.Right)
 		} else {
-			res += "n"
+			builder.WriteString("n")
 		}
-		res += " "
+		builder.WriteString(" ")
 	}
 	//fmt.Println(res)
-	return res
+	return builder.String()
 }
 
 // Deserializes your encoded data to tree.
