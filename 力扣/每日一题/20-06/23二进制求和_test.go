@@ -21,13 +21,13 @@ func addBinary(a string, b string) string {
 
 		var va byte
 
-		last := len(res) - 1 - i
+		offset := len(res) - 1 - i
 
-		if la-1-last >= 0 {
-			va += a[la-1-last] - '0'
+		if la-1-offset >= 0 {
+			va += a[la-1-offset] - '0'
 		}
-		if lb-1-last >= 0 {
-			va += b[lb-1-last] - '0'
+		if lb-1-offset >= 0 {
+			va += b[lb-1-offset] - '0'
 		}
 		va += res[i] - '0'
 
