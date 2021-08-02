@@ -1,4 +1,4 @@
-package basetest
+package mxorm
 
 import (
 	"fmt"
@@ -236,3 +236,5 @@ func TestXorm(t *testing.T) {
 	//updateXorm3()
 	//seletXorm4()
 }
+
+// 更新0值数据
